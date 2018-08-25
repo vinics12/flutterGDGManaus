@@ -22,10 +22,17 @@ class CategoryDetailPage extends StatefulWidget {
 
 class CategoryDetailPageState extends State<CategoryDetailPage> {
   var _count = 0;
+  var _toggled = false;
 
   void _onTap(){
     setState((){
       _count++;
+    });
+  }
+
+  void _onToggle(toggle){
+    setState((){
+      _toggled = toggle;
     });
   }
 
@@ -36,14 +43,14 @@ class CategoryDetailPageState extends State<CategoryDetailPage> {
         backgroundColor: widget.category.color,
         title: new Text(widget.category.name),
       ),
-      body: new GestureDetector(
-        onTap: ()=> _onTap(),
-        child: new Container(
-          child: new Center(
-            child: new Text("$_count teste", style: Theme.of(context).textTheme.title,),
-          ),
+      body: new Container(
+        child: new Center(
+          child: new Column( children: <Widget>[
+            new GestureDetector(child: new Text("$_count teste", style: Theme.of(context).textTheme.title,), onTap: ()=>this._onTap(),),
+            new Switch(value: _toggled, onChanged: (toggle)=> this._onToggle(toggle))
+          ],),
         ),
-      ),
+      )
     );
   }
 }

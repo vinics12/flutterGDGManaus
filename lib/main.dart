@@ -7,10 +7,21 @@ import 'package:hello_world/categories_page.dart';
 
 void main() {
   runApp(
-    new MaterialApp(
+    new MyApp()
+  );
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Unit Converter',
       home: new CategoriesPage(),
-    )
-  );
+      theme: new ThemeData(textTheme: Theme.of(context).textTheme.apply(
+        bodyColor: Colors.blue[700],
+      )),
+    );
+  }
+
 }
