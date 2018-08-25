@@ -3,6 +3,6 @@ class Unit {
   double conversion;
 
 
-  Unit(this.name, this.conversion);
+  Unit({this.name, this.conversion});
 
 }

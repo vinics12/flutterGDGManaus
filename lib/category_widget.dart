@@ -1,36 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/category.dart';
-import 'package:hello_world/category_detail_page.dart';
+import 'category.dart';
+import 'category_detail_page.dart';
 
 class CategoryWidget extends StatelessWidget {
   Category category;
 
   CategoryWidget({this.category});
 
-  _goToDetail(BuildContext context){
-    if(Navigator.of(context).canPop()){
+  _goToDetail(BuildContext context) {
+    if (Navigator.of(context).canPop()) {
       Navigator.of(context).pop();
     }
-    Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new CategoryDetailPage(category)));
+    Navigator.of(context).push(
+      new MaterialPageRoute<Null>(
+        builder: (BuildContext context) => new CategoryDetailPage(
+          category: this.category,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return new Material(
+      child: new Container(
         height: 90.0,
         child: new InkWell(
-          splashColor: category.color,
           borderRadius: new BorderRadius.circular(8.0),
-          onTap: ()=> _goToDetail(context),
+          highlightColor: category.color,
+          splashColor: category.color,
+          onTap: () => _goToDetail(context),
           child: new Row(
-            children: <Widget>[
+            children: [
               new Icon(
-                category.icon,
+                Icons.cake,
                 size: 60.0,
               ),
-              new Text(category.name)
+              new Center(
+                child: new Text(category.name,
+                    style: new TextStyle(
+                      fontSize: 22.0,
+                    )),
+              ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
